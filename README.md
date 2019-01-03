@@ -40,7 +40,7 @@ b) Trimming the barcodes from original files and generating trimmed.fastq files
 > seqtk trimfq -b 12 R2.fastq > R2_trimmed_seq.fastq
 
 
-### Step2: assemble paired end read using SeqRep
+### Step2: assemble paired-end reads using SeqRep
 
 > SeqPrep -r R1_trimmed_seq.fastq -f R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq -2 R2_trimmed_SeqRep.fastq -s merged.fastq -A GATCGGAAGAGCACACG -B AGATCGGAAGAGCGTCGT -m 0.15 -n 0.8 -o 5
 
