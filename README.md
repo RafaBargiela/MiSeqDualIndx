@@ -1,16 +1,16 @@
 # MiSeqDualIndx
-Pipeline to process  ILLUMINA MISEQ results produced by DUAL-INDEXING methodology
+## Pipeline to process  ILLUMINA MISEQ results produced by DUAL-INDEXING methodology
 
 Following protocol is a mixture of the steps mentioned by Fadrosh et al. (Microbiome, 2014) at github https://github.com/igsbma/MiSeq16S and those mentioned in https://github.com/laxeye/BFXscripts/blob/master/16S/16S-DI-workflow.sh by Aleksei  Korzhenkov.
 
 Steps from 1 to 4 complete the first phase of the pipeline, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime to final demultiplexing, OTU picking and taxonomy assignation. Currently is prepared to use Qiime 1 but there will be an update in the future to performed the same steps under Qiime 2.
 
-Initial files:
+### Initial files:
 -R1.fastq (Fastq file with the forward reads).
 -R2.fastq (Fastq file with the reverse reads).
 - sample.sheet.data.csv -> File with the SampleIDs and barcodes used in the MiSeq run.
 
-Dependencies:
+### Dependencies:
 We need to have installed the following tools. A good options could be using anaconda and create an environment with all the programs installed on it, to make sure that everything is in the right place.
 
 - fastx toolkit (http://hannonlab.cshl.edu/fastx_toolkit/)
@@ -22,7 +22,7 @@ We need to have installed the following tools. A good options could be using ana
 
 Some of the scripts also require the use of biopython and python2, so be aware that some warnings or errors can prompt because of this issue.
 
-Step 1: trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed:
+### Step 1: trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
 
 a) Trimming barcodes from fastq files and generating barcodes.fastq files
 
@@ -40,7 +40,7 @@ b) Trimming the barcodes from original files and generating trimmed.fastq files
 > seqtk trimfq -b 12 R2.fastq > R2_trimmed_seq.fastq
 
 
-Step2: assemble paired end read using SeqRep
+### Step2: assemble paired end read using SeqRep
 
 > SeqPrep -r R1_trimmed_seq.fastq -f R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq -2 R2_trimmed_SeqRep.fastq -s merged.fastq -A GATCGGAAGAGCACACG -B AGATCGGAAGAGCGTCGT -m 0.15 -n 0.8 -o 5
 
@@ -54,14 +54,14 @@ According to the stats displayed, you can choose values for mismatches.
 
 > tagcleaner.pl -fastq merged.fastq  -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT -mm3 XX -mm5 XX -out Merged.clean.fastq -nomatch 3
 
-Step4: Macthing up barcodes and merged reads
+### Step4: Macthing up barcodes and merged reads
 
 Note: Python2 and biopython are required in this step. Would be usefull to create a conda environment under python2.7.5 and install there biopython.
 
 > fq_getPairAndOrphan1.8.py Merged.clean.fastq R1R2_barcode.fastq Reads.ready.fastq Barcodes.ready.fastq Orphan.fastq
 
 
-PIPELINE USING QIIME 1.
+## PIPELINE USING QIIME 1.
 
 This pipeline is though to be used under Qiime1. There is also the possibility to use Qiime2, though.  You just have to change the scripts and adapt the input and mapping file to use the new version of Qiime.
 As recommendation, is better to install qiime1 trough anaconda in a specific environment in order to avoid any problem with the numpy version of your system:
@@ -76,7 +76,7 @@ Once you finish all the process you can deactivate the environment using:
 
 > source deactivate
 
-Step5: Create a mappting file for qiime. 
+### Step5: Create a mappting file for qiime. 
 
 For this step it is possible to use the script by Aleksei Korzhenkov provided in https://github.com/laxeye/mapgen.
 
@@ -93,13 +93,13 @@ Use validation tool from qiime to check the file:
 
 It can return some errors, but will be probably because the lack of Linker sequence and the empty field on Description. Anyway, the program returns a corrected file on the validadtion-results dir. You can use the corrected version provided by the script in de output directory.
 
-Step 6: Demultiplexing the sequences
+### Step 6: Demultiplexing the sequences
 
 Now we going to run split_libraries_fastq.py, we must remember to use the option –barcode_type and set it in 24, which is the length of our current barcodes:
 
 > split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir
 
-Step 7: Picking OTUS and classify sequences
+### Step 7: Picking OTUS and classify sequences
 
 Once the demultiplexing process has ended we will get in the OUT directory a fasta file named seqs.fna, among other files. This is the file which we will use to get the OTUS and assign them to a taxonomy. In order to do this we will need to download as well the database from the ARB-SILVA website. 
 
@@ -118,7 +118,7 @@ Then, you can independently classify the OTU sequences:
 
 Regard that in both scripts we use the option -O, to set the number of CPU cores to use and make faster the process. In case of assign_taxonomy.py, if we want to use this option we have to run the alternative script parallel_assign_taxonomy_blast.py (there are also other option which use other algorithms like uclust or vsearch).
 
-Step 8: Diversity and taxonomy distribution analysis
+### Step 8: Diversity and taxonomy distribution analysis
 
 Final step will be to analyze the final results form picking otus and taxonomy assignation. To do this we can use two different scripts: summarize_taxa_through_plots.py, which just analyzes the taxonomy distribution; and core_diversity_analyses.py, which analyzes the taxonomy distribution and also diversity parameters like rarefaction curves and diversity indexes.
 
@@ -130,6 +130,6 @@ Inside the output directory, the most important files are the .html files into t
 
 In the case of core_diversity_analyses.py, the main output file is the index.html file, which address you to through the web browser into the different taxonomy and diversity charts generated by the different analysis. This script provides a deeper analysis, but both should return similar results in the taxonomy distribution charts.
 
-PIPELINE USING QIIME 2
+## PIPELINE USING QIIME 2
 
 Will be edited in the future...
