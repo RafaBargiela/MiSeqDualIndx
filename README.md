@@ -25,13 +25,13 @@ Some of the scripts also require the use of biopython and python2, so be aware t
 ### Step 1: trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
 
 a) Trimming barcodes from fastq files and generating barcodes.fastq files
+```shell
+fastx_trimmer -i R1.fastq -f 1 -l 12 -Q 33 -o R1_barcode.fastq
+fastx_trimmer -i R2.fastq -f 1 -l 12 -Q 33 -o R2_barcode.fastq
 
-> fastx_trimmer -i R1.fastq -f 1 -l 12 -Q 33 -o R1_barcode.fastq
-> fastx_trimmer -i R2.fastq -f 1 -l 12 -Q 33 -o R2_barcode.fastq
-
-> cat R1_barcode.fastq | fq_mergelines.pl > R1_barcode_temp
-> cat R2_barcode.fastq | fq_mergelines.pl > R2_barcode_temp
-
+cat R1_barcode.fastq | fq_mergelines.pl > R1_barcode_temp
+cat R2_barcode.fastq | fq_mergelines.pl > R2_barcode_temp
+```
 > paste R1_barcode_temp R2_barcode_temp | awk -F"\t" '{print $5"\t"$2$6"\t"$3"\t"$4$8}' | fq_splitlines.pl > R1R2_barcode.fastq
 
 b) Trimming the barcodes from original files and generating trimmed.fastq files
