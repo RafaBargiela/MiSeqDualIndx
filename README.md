@@ -6,8 +6,8 @@ Following protocol is a mixture of the steps mentioned by Fadrosh et al. (Microb
 Steps from 1 to 4 complete the first phase of the pipeline, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime to final demultiplexing, OTU picking and taxonomy assignation. Currently is prepared to use Qiime 1 but there will be an update in the future to performed the same steps under Qiime 2.
 
 ### Initial files:
--R1.fastq (Fastq file with the forward reads).
--R2.fastq (Fastq file with the reverse reads).
+- R1.fastq (Fastq file with the forward reads).
+- R2.fastq (Fastq file with the reverse reads).
 - sample.sheet.data.csv -> File with the SampleIDs and barcodes used in the MiSeq run.
 
 ### Dependencies:
