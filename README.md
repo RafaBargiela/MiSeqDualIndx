@@ -50,9 +50,10 @@ In this step we need to use tagcleaner. The adapters correspond to the last part
 ```shell
 tagcleaner.pl -fastq merged.fastq -verbose -stats -tag5 GGACTACHVGGGTWTCTAAT -tag3 TTACCGCGGCKGCTGVCAC
 ```
-According to the stats displayed, you can choose values for mismatches.
+You will be prompted for some statistics which could help you to choose the values for maximum mismatch on for the next step. Values between 0-2 are OK for $mm3 and $mm5.
+NOTE:If the statistics show that your reads start to group from values al ready higher than 2, you can SKIP this step. Probably that means that the adpter has been removed during the sequencing process.
 ```shell
-tagcleaner.pl -fastq merged.fastq  -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT -mm3 XX -mm5 XX -out Merged.clean.fastq -nomatch 3
+tagcleaner.pl -fastq merged.fastq  -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT -mm3 $mm3 -mm5 $mm5 -out Merged.clean.fastq -nomatch 3
 ```
 ### Step4: Macthing up barcodes and merged reads
 
