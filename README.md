@@ -51,7 +51,7 @@ In this step we need to use tagcleaner. The adapters correspond to the last part
 tagcleaner.pl -fastq merged.fastq -verbose -stats -tag5 GGACTACHVGGGTWTCTAAT -tag3 TTACCGCGGCKGCTGVCAC
 ```
 You will be prompted for some statistics which could help you to choose the values for maximum mismatch on for the next step. Values between 0-2 are OK for $mm3 and $mm5.
-NOTE:If the statistics show that your reads start to group from values al ready higher than 2, you can SKIP this step. Probably that means that the adpter has been removed during the sequencing process.
+**NOTE:** If the statistics show that your reads start to group from values higher than 2, you can SKIP this step. Probably that means that the adapter has been removed during the sequencing process.
 ```shell
 tagcleaner.pl -fastq merged.fastq  -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT -mm3 $mm3 -mm5 $mm5 -out Merged.clean.fastq -nomatch 3
 ```
