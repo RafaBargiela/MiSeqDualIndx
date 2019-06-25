@@ -86,7 +86,7 @@ In this protocol we also provide a script to create a mapping file from the Samp
 Basically, the file has four basic columns (tab separated):
  #SampleID[tab]BarcodeSequence[tab]LinkerPrimerSequence[tab]Description.
 
-In the first one with indicate the name of our samples, been careful to not use forbidding characters. In the BarcodeSequence column, we add a 24 barcode sequence, which will be the result of joining both Index sequences. LinkerPrimerSequence can go empty (should be removed in previous steps). Description column can be empty as well.
+In the first one, with the name of our samples, be careful to not use forbidding characters. In the BarcodeSequence column, we add a 24 barcode sequence, which will be the result of joining both Index sequences. LinkerPrimerSequence can go empty (should be removed in previous steps). Description column can be empty as well.
 
 Use validation tool from qiime to check the file:
 ```shell
