@@ -120,7 +120,7 @@ parallel_assign_taxonomy_blast.py -i rep_set.fna -r  silva132_97.fna -t consensu
 ```
 Regard that in both scripts we use the option -O, to set the number of CPU cores to use and make faster the process. In case of assign_taxonomy.py, if we want to use this option we have to run the alternative script parallel_assign_taxonomy_blast.py (there are also other option which use other algorithms like uclust or vsearch).
 
-The most important output file is the otu_table_mc2_w_tax_no_pynast_failures.biom. This table provide the abundance of reads for each otu on each sample, with the related taxonomy. *mc2* means minimum count of 2, so it only shows those OTUs with a number of reads >1. It is very convenient to convert this file in a most readable format, using the following command:
+The most important output is the *otu_table_mc2_w_tax_no_pynast_failures.biom* file. This table provide the abundance of reads for each otu on each sample, with the related taxonomy. *mc2* means minimum count of 2, so it only shows those OTUs with a number of reads >1. It is very convenient to convert this file in a most readable format, using the following command:
 ```shell
 biom convert -i otu_table_mc2_w_tax_no_pynast_failures.biom -o Final_otu_table.txt --to-tsv --header-key taxonomy
 ```
