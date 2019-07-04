@@ -42,13 +42,13 @@ seqtk trimfq -b 12 R2.fastq > R2_trimmed_seq.fastq
 
 ### Step2: assemble paired-end reads using SeqRep
 ```shell
-SeqPrep -r R1_trimmed_seq.fastq -f R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq.gz -2 R2_trimmed_SeqRep.fastq.gz -s merged.fastq.gz -A GATCGGAAGAGCACACG -B AGATCGGAAGAGCGTCGT -m 0.15 -n 0.8 -o 5
+SeqPrep -r R1_trimmed_seq.fastq -f R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq.gz -2 R2_trimmed_SeqRep.fastq.gz -s merged.fastq.gz -m 0.15 -n 0.8 -o 5
 ```
 ### Step3: Clean and trim sequences from adapter/primers
 
 In this step we need to use tagcleaner. The adapters correspond to the last part of the forward (tag5) and reverse (tag3) oligo sequence in the sample_sheet.csv. First command is to get statistics, and the second to really trim the sequences:
 ```shell
-tagcleaner.pl -fastq merged.fastq -verbose -stats -tag5 GGACTACHVGGGTWTCTAAT -tag3 TTACCGCGGCKGCTGVCAC
+tagcleaner.pl -fastq merged.fastq -verbose -stats -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT
 ```
 You will be prompted for some statistics which could help you to choose the values for maximum mismatch on for the next step. Values between 0-2 are OK for $mm3 and $mm5.
 **NOTE:** If the statistics show that your reads start to group from values higher than 2, you can SKIP this step. Probably that means that the adapter has been removed during the sequencing process.
