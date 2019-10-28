@@ -108,7 +108,7 @@ Otu picking will be performed against the SILVA database as reference, using the
 ```shell
 pick_open_reference_otus.py -i seqs.fna -r silva132_97.fna -t  -o pickOtus_output_dir -a  -O 40 -p $PARAMETERS
 ```
-Among all the output file created in the output directory, the most important is the out table named as otu_table_mc2_w_tax_no_pynast_failures.biom, which contains final OTUs selection after some filterings. Also, rep_set.fna is also important, so it has the reprsentative sequences for each OTU.
+Among all the output files created in the output directory, the most important is the table named as otu_table_mc2_w_tax_no_pynast_failures.biom, which contains final OTUs selection after some filterings. Also, rep_set.fna is also important, so it has the reprsentative sequences for each OTU.
 
 In case you want to run separately the taxonomy assignation you must run:
 ```shell
