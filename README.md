@@ -1,7 +1,7 @@
 # MiSeqDualIndx
 ## Pipeline to process  ILLUMINA MISEQ results produced by DUAL-INDEXING methodology
 
-Following protocol is a mixture of the steps mentioned by Fadrosh et al. (Microbiome, 2014) at github https://github.com/igsbma/MiSeq16S and those mentioned in https://github.com/laxeye/BFXscripts/blob/master/16S/16S-DI-workflow.sh by Aleksei  Korzhenkov.
+This protocol is based on the pipeline mentioned by Fadrosh et al. (Microbiome, 2014) at github https://github.com/igsbma/MiSeq16S and also implemented by Alesei Korzshenkov at https://github.com/laxeye/BFXscripts/blob/master/16S/16S-DI-workflow.sh.
 
 Steps from 1 to 4 complete the first phase of the pipeline, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime to final demultiplexing, OTU picking and taxonomy assignation. Currently is prepared to use Qiime 1 but there will be an update in the future to performed the same steps under Qiime 2.
 
