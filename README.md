@@ -42,7 +42,7 @@ seqtk trimfq -b 12 R2.fastq > R2_trimmed_seq.fastq
 
 ### Step2: assemble paired-end reads using SeqRep
 ```shell
-SeqPrep -r R1_trimmed_seq.fastq -f R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq.gz -2 R2_trimmed_SeqRep.fastq.gz -s merged.fastq.gz -m 0.15 -n 0.8 -o 5
+SeqPrep -f R1_trimmed_seq.fastq -r R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq.gz -2 R2_trimmed_SeqRep.fastq.gz -s merged.fastq.gz -m 0.15 -n 0.8 -o 5
 ```
 ### Step3: Clean and trim sequences from adapter/primers
 
