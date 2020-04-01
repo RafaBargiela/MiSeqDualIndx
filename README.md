@@ -100,6 +100,12 @@ Now we going to run split_libraries_fastq.py, we must remember to use the option
 ```shell
 split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir
 ```
+In case you are analyzing more than one set of samples, it is possible to separate the reads belonging to each group of samples using filter_fasta.py. First, you will need to add the list of samples of each group in a text list and then run it like this:
+```shell
+filter_fasta.py -f seqs.fna -o Group.seqs.fna --sample_id_fp List.txt
+```
+
+
 ### Step 7: Picking OTUS and classify sequences
 
 Once the demultiplexing process has ended we will get in the OUT directory a fasta file named seqs.fna, among other files. This is the file which we will use to get the OTUS and assign them to a taxonomy. In order to do this we will need to download as well the database from the ARB-SILVA website. 
@@ -125,6 +131,11 @@ The most important output is the *otu_table_mc2_w_tax_no_pynast_failures.biom* f
 biom convert -i otu_table_mc2_w_tax_no_pynast_failures.biom -o Final_otu_table.txt --to-tsv --header-key taxonomy
 ```
 Option *--to-tsv* is to convert it into a tab-delimited table, while *--header-key taxonomy* is needed to add the taxonomy assigned to each otu at the end of the table.
+
+Once you get the OTU table, it is possible to get specific OTU sequences belonging to specific sample groups, using filter_fasta.py. First, you need to make list of OTUs ids on a text file:
+```shell
+filter_fasta.py -f OTUs_rep_set.fna -o OTUs.out.fna -s OTUs.List.txt
+```
 
 ### Step 8: Diversity and taxonomy distribution analysis
 
