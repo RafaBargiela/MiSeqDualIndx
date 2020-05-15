@@ -100,7 +100,11 @@ Now we going to run split_libraries_fastq.py, we must remember to use the option
 ```shell
 split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir
 ```
-In case you are analyzing more than one set of samples, it is possible to separate the reads belonging to each group of samples using filter_fasta.py. First, you will need to add the list of samples of each group in a text list and then run it like this:
+In terms of a future submission to any database of the reads in fastq QIIME offers an interesting option called store_demultiplexed_fastq. With this flag an aditional fastq file is generated with the same reads contained in the seqs.fna generated as default. This is specially interesting when several samples from different experiments are analyzed in the same sequencing run and we need a specific fastq file for each experiment samples, for instance to submit to Genebank:
+```shell
+split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir --store_demultiplexed_fastq
+```
+It is possible to separate the reads belonging to each group of samples using filter_fasta.py. First, you will need to add the list of samples of each group in a text list and then run it like this:
 ```shell
 filter_fasta.py -f seqs.fna -o Group.seqs.fna --sample_id_fp List.txt
 ```
