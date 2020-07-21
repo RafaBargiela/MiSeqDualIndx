@@ -13,11 +13,11 @@ Steps from 1 to 4 complete the first phase of the pipeline, where the pair-end r
 ### Dependencies:
 We need to have installed the following tools. A good options could be using anaconda and create an environment with all the programs installed on it, to make sure that everything is in the right place.
 
-- fastx toolkit (http://hannonlab.cshl.edu/fastx_toolkit/)
-- seqtk (https://github.com/lh3/seqtk)
-- SeqPrep (https://github.com/jstjohn/SeqPrep)
-- tagcleaner (http://tagcleaner.sourceforge.net/)
-- Qiime (http://qiime.org/)
+- fastx-toolkit v0.0.14 (http://hannonlab.cshl.edu/fastx_toolkit/)
+- seqtk v1.3 (https://github.com/lh3/seqtk)
+- SeqPrep v0.1 (https://github.com/jstjohn/SeqPrep)
+- tagcleaner v0.16 (http://tagcleaner.sourceforge.net/)
+- Qiime 1.9.1 (http://qiime.org/)
 - scripts from:  https://github.com/igsbma/MiSeq16S
 
 Some of the scripts also require the use of biopython and python2, so be aware that some warnings or errors can prompt because of this issue.
