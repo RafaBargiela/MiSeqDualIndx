@@ -65,7 +65,7 @@ fq_getPairAndOrphan1.8.py Merged.clean.fastq R1R2_barcode.fastq Reads.ready.fast
 ## PIPELINE USING QIIME 1.
 
 This pipeline is though to be used under Qiime1. There is also the possibility to use Qiime2, though.  You just have to change the scripts and adapt the input and mapping file to use the new version of Qiime.
-As recommendation, is better to install qiime1 trough anaconda in a specific environment in order to avoid any problem with the numpy version of your system:
+As recommendation, is better to install qiime1 through anaconda in a specific environment in order to avoid any problem with the numpy version of your system:
 ```shell
 conda create -n qiime1 qiime matplotlib=1.4.3 mock nose -c bioconda
 ```
