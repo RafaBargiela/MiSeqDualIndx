@@ -1,5 +1,5 @@
 # MiSeqDualIndx
-## Pipeline to process  ILLUMINA MISEQ results produced by DUAL-INDEXING methodology
+## Pipeline to process  ILLUMINA MISEQ results produced by DUAL-INDEXING improved methodology
 
 This protocol is based on the pipeline mentioned by Fadrosh et al. (Microbiome, 2014) at github https://github.com/igsbma/MiSeq16S and also implemented by Alesei Korzshenkov at https://github.com/laxeye/BFXscripts/blob/master/16S/16S-DI-workflow.sh.
 
