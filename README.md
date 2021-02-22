@@ -100,7 +100,7 @@ Now we going to run split_libraries_fastq.py, we must remember to use the option
 ```shell
 split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir
 ```
-In terms of a future submission to any database of the reads in fastq QIIME offers an interesting option called store_demultiplexed_fastq. With this flag an aditional fastq file is generated with the same reads contained in the seqs.fna generated as default. This is specially interesting when several samples from different experiments are analyzed in the same sequencing run and we need a specific fastq file for each experiment samples, for instance to submit to Genebank:
+In terms of a future submission to any database of the reads in fastq QIIME offers an interesting option called store_demultiplexed_fastq. With this flag an aditional fastq file is generated with the same reads contained in the seqs.fna generated as default. This is specially interesting when several samples from different experiments are analyzed in the same sequencing run and we need a specific fastq file for each experiment samples (i.e. to submit to Genebank):
 ```shell
 split_libraries_fastq.py -i Reads.ready.fastq -b Barcodes.ready.fastq -m mappingFile_corrected.txt --barcode-type 24 -o split_output_dir --store_demultiplexed_fastq
 ```
