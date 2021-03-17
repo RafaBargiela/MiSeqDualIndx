@@ -186,15 +186,31 @@ rm qiime2-2021.2-py36-linux-conda.yml
  
  Working with QIIME2 is completely different than QIIME1. It works with specific _artifacts_ that are modified and transformed inside its own environment. So, firt we need to create a specific _.qza_ file, which will include our sequences and barcodes, for further processing on QIIME2.
  
+ Imput directory: _RAW/_ (containing sequences.fastq.gz and barcodes.fastq.gz)
  ```shell
  qiime tools import \
   --type EMPSingleEndSequences \
   --input-path RAW \
   --output-path sequences.qza
  ```
- 
+  Files created: _sequences.qza_
+  
  Note that on the _--input-path_ option we write only the FULL PATH to the directory where are located the files, here we will assume that it is inside the folder where we are located. Also, regard that _--type_ is set with _EMPSingleEndSequences_, this is because we will follow the pipeline as if sequences were Single End sequences. We know that is not the case, but R1 and R2 have been assembled and merged on steps 1.2-1.4.
  
- 
+  ### 3.2.Demultiplexing
+  
+  Here we will separate every read to each sample, creating two new files, one containing the reads per sample and another one with details about the demultiplexing process.
+  
+  Imput files: _sequences.qza_
+  ```shell
+  qiime demux emp-single \
+  --i-seqs sequences.qza \
+  --m-barcodes-file sample-metadata.tsv \
+  --m-barcodes-column barcode-sequence \
+  --p-no-golay-error-correction \
+  --o-per-sample-sequences demux.qza \
+  --o-error-correction-details demux-details.qza
+  ```
+ Files created: _demux.qza_ and _demux-details.qza_
  
 Will be edited in the future...
