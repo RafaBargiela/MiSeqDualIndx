@@ -17,12 +17,15 @@ We need to have installed the following tools. A good options could be using ana
 - seqtk v1.3 (https://github.com/lh3/seqtk)
 - SeqPrep v0.1 (https://github.com/jstjohn/SeqPrep)
 - tagcleaner v0.16 (http://tagcleaner.sourceforge.net/)
-- Qiime 1.9.1 (http://qiime.org/)
+- Qiime 1.9.1 (http://qiime.org/) or
+- Qiime 2021.2 (https://docs.qiime2.org/)
 - scripts from:  https://github.com/igsbma/MiSeq16S
 
 Some of the scripts also require the use of biopython and python2, so be aware that some warnings or errors can prompt because of this issue.
 
-### Step 1: trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
+## 1.PREPROCESSING OF THE SEQUENCING RESULTS
+
+### 1.1.trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
 
 a) Trimming barcodes from fastq files and generating barcodes.fastq files
 ```shell
@@ -40,11 +43,11 @@ seqtk trimfq -b 12 R1.fastq > R1_trimmed_seq.fastq
 seqtk trimfq -b 12 R2.fastq > R2_trimmed_seq.fastq
 ```
 
-### Step2: assemble paired-end reads using SeqRep
+### 1.2.Assembling paired-end reads using SeqRep
 ```shell
 SeqPrep -f R1_trimmed_seq.fastq -r R2_trimmed_seq.fastq -1 R1_trimmed_SeqRep.fastq.gz -2 R2_trimmed_SeqRep.fastq.gz -s merged.fastq.gz -m 0.15 -n 0.8 -o 5
 ```
-### Step3: Clean and trim sequences from adapter/primers
+### 1.3.Cleaning and trimming adapter/primers sequences
 
 In this step we need to use tagcleaner. The adapters correspond to the last part of the forward (tag5) and reverse (tag3) oligo sequence in the sample_sheet.csv. First command is to get statistics, and the second to really trim the sequences:
 ```shell
@@ -55,16 +58,16 @@ You will be prompted for some statistics which could help you to choose the valu
 ```shell
 tagcleaner.pl -fastq merged.fastq  -tag5 GTGBCAGCMGCCGCGGTAA  -tag3 GGACTACHVGGGTWTCTAAT -mm3 $mm3 -mm5 $mm5 -out Merged.clean.fastq -nomatch 3
 ```
-### Step4: Macthing up barcodes and merged reads
+### 1.4.Macthing up barcodes and merged reads
 
 Note: Python2 and biopython are required in this step. Would be usefull to create a conda environment under python2.7.5 and install there biopython.
 ```shell
 fq_getPairAndOrphan1.8.py Merged.clean.fastq R1R2_barcode.fastq Reads.ready.fastq Barcodes.ready.fastq Orphan.fastq
 ```
 
-## PIPELINE USING QIIME 1.
+## 2.PROCESSING SEQUENCING READS USING QIIME 1.
 
-This pipeline is though to be used under Qiime1. There is also the possibility to use Qiime2, though.  You just have to change the scripts and adapt the input and mapping file to use the new version of Qiime.
+This pipeline is thought to be used under Qiime1. There is also the possibility to use Qiime2, though.  You just have to change the scripts and adapt the input and mapping file to use the new version of Qiime.
 As recommendation, is better to install qiime1 through anaconda in a specific environment in order to avoid any problem with the numpy version of your system:
 ```shell
 conda create -n qiime1 qiime matplotlib=1.4.3 mock nose -c bioconda
@@ -77,7 +80,7 @@ Once you finish all the process you can deactivate the environment using:
 ```shell
 source deactivate
 ```
-### Step5: Create a mappting file for qiime. 
+### 2.1.Create a mappting file for qiime. 
 
 For this step it is possible to use the script by Aleksei Korzhenkov provided in https://github.com/laxeye/mapgen.
 
@@ -94,7 +97,7 @@ validate_mapping_file.py -m mappingFile.txt -p -o validation-results/
 ```
 It can return some errors, but will be probably because the lack of Linker sequence and the empty field on Description. Anyway, the program returns a corrected file on the validadtion-results dir. You can use the corrected version provided by the script in de output directory.
 
-### Step 6: Demultiplexing the sequences
+### 2.2.Demultiplexing the sequences
 
 Now we going to run split_libraries_fastq.py, we must remember to use the option –barcode_type and set it in 24, which is the length of our current barcodes:
 ```shell
@@ -110,7 +113,7 @@ filter_fasta.py -f seqs.fna -o Group.seqs.fna --sample_id_fp List.txt
 ```
 
 
-### Step 7: Picking OTUS and classify sequences
+### 2.3.Picking OTUS and classify sequences
 
 Once the demultiplexing process has ended we will get in the OUT directory a fasta file named seqs.fna, among other files. This is the file which we will use to get the OTUS and assign them to a taxonomy. In order to do this we will need to download as well the database from the ARB-SILVA website. 
 
@@ -141,7 +144,7 @@ Once you get the OTU table, it is possible to get specific OTU sequences belongi
 filter_fasta.py -f OTUs_rep_set.fna -o OTUs.out.fna -s OTUs.List.txt
 ```
 
-### Step 8: Diversity and taxonomy distribution analysis
+### 2.8.Diversity and taxonomy distribution analysis
 
 Final step will be to analyze the final results form picking otus and taxonomy assignation. To do this we can use two different scripts: summarize_taxa_through_plots.py, which just analyzes the taxonomy distribution; and core_diversity_analyses.py, which analyzes the taxonomy distribution and also diversity parameters like rarefaction curves and diversity indexes.
 ```shell
@@ -153,7 +156,7 @@ core_diversity_analyses.py -i  otu_table_mc2_w_tax_no_pynast_failures.biom -o co
 ```
 In the case of core_diversity_analyses.py, the main output file is the index.html file, which address you through the web browser into the different taxonomy and diversity charts generated by the analysis. This script provides a deeper study, but both should return similar results in the taxonomy distribution charts. In this option you need to add additional parameters like the mapping file and the sampling depth to use for even sub-sampling and maximum rarefaction depth. On Qiime website they set the -e parameter on 20, but you could use the command biom summarize-table to decide value.
 
-## PIPELINE USING QIIME 2
+## 3. PIPELINE USING QIIME 2
 
 For the analysis using QIIME2 we start from Step 4, once all preprocessing is done. So, we have know all our reads and barcodes in the files **Reads.ready.fastq** and **Barcodes.ready.fastq**. To avoid any possible issues with names and location using QiIME2 we will:
 - compress these files with *gzip*
@@ -167,5 +170,31 @@ Also, we need to create a *sample-metadata.tsv* file to use with QIIME2, a bit d
  SAMPLE1 BARCODE_SEQUENCE OPTIONAL_DATA
  `
  It is very similar to the mapping file used on QIIME1, with the 24bp barcodes sequences (Reverse-forward joined) in the second column. Be careful with the first column name, QIIME2 only accepts some different variants.
+ As it was with QIIME1, it is also recommended to install QIMME2 under a conda environment. You can do it as follows:
+ ```shell
+ wget https://data.qiime2.org/distro/core/qiime2-2021.2-py36-linux-conda.yml
+conda env create -n qiime2-2021.2 --file qiime2-2021.2-py36-linux-conda.yml
+# OPTIONAL CLEANUP
+rm qiime2-2021.2-py36-linux-conda.yml
+```
+ Then, activate the environment:
+ ```shell
+ conda activate qiime2-2021.2
+ ```
+ 
+ ### 3.1.Importing files to QIIME2 environment
+ 
+ Working with QIIME2 is completely different than QIIME1. It works with specific _artifacts_ that are modified and transformed inside its own environment. So, firt we need to create a specific _.qza_ file, which will include our sequences and barcodes, for further processing on QIIME2.
+ 
+ ```shell
+ qiime tools import \
+  --type EMPSingleEndSequences \
+  --input-path RAW \
+  --output-path sequences.qza
+ ```
+ 
+ Note that on the _--input-path_ option we write only the FULL PATH to the directory where are located the files, here we will assume that it is inside the folder where we are located. Also, regard that _--type_ is set with _EMPSingleEndSequences_, this is because we will follow the pipeline as if sequences were Single End sequences. We know that is not the case, but R1 and R2 have been assembled and merged on steps 1.2-1.4.
+ 
+ 
  
 Will be edited in the future...
