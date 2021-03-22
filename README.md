@@ -300,9 +300,11 @@ Finally, we run the training process of the classifier:
       --i-reference-taxonomy SILVA.axonomy.qza \
       --o-classifier SILVA.classifier.qza
   ```
-  File created: _SILVA.classifier.qza_
+  File created: **_SILVA.classifier.qza_**
   
   Regard that if we don't want to extract reference reads we just run the training process straight with the _SILVA.seqs.qza_ file rather than _SILVA.ref-seqs.qza_.
+
+#### 3.4.2.Running the taxonomic classification
 
 
 
