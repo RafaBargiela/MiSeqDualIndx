@@ -3,7 +3,7 @@
 
 This protocol is based on the pipeline mentioned by Fadrosh et al. (Microbiome, 2014) at github https://github.com/igsbma/MiSeq16S and also implemented by Alesei Korzshenkov at https://github.com/laxeye/BFXscripts/blob/master/16S/16S-DI-workflow.sh. In this case, dual-indexing sequencing methodology is combined with the use of an heterogeneity spacer on the primer design to improve the quality of the reads. 
 
-Steps from 1 to 4 complete the first phase of the pipeline, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime to final demultiplexing, OTU picking and taxonomy assignation. Currently is prepared to use Qiime 1 but there will be an update in the future to performed the same steps under Qiime 2.
+Currently, a preprocessing of the initial files is needed, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime for final demultiplexing of the samples, picking of representative sequences (OTUs using Qiime1 or ASVs using Qiime2 with DADA2) and final taxonomic assignation.
 
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
@@ -218,16 +218,45 @@ Addtionally, you could need a summary of the demultiplexing process, which you c
 
 ```shell
   qiime demux summarize --i-data demux.qza --o-visualization demux.qzv
+  mkdir DEMUX_SUMMARY
   qiime tools export --input-path demux.qzv --output-path DEMUX_SUMMARY
 ```
 First command produce a _.qzv_ file which you could visualize using _Qiime view_. Second command uses this file to return different summary tables which will be send the the _output-path_ directory.
 Also, you could need to get the individual fastq file, which you could get into a common directory with this command:
 
 ```shell
+mkdir FASTQ_FILES
  qiime tools export --input-path demux.qza --output-path FASTQ_FILES
 ```
 
  ### 3.3.Quality control, denoising and picking representative sequences using DADA2
+
+During this chimeras will be removed and reads will be filtered by length and quality. Also, dereplication will be performed, resulting in a set of uique Amplicon Sequence Variants (ASVs), representing the unique nucleotides sequence variants among the whole dataset of reads.
+
+```shell
+qiime dada2 denoise-single \
+  --i-demultiplexed-seqs demux.qza \
+  --p-trunc-len 0 \
+  --o-representative-sequences rep-seqs-dada2.qza \
+  --o-table table-dada2.qza \
+  --o-denoising-stats stats-dada2.qza
+```
+Files created: re-seqs-dada2.qza, table-dada2.qza and stats-dada2.qza
+
+Regards here that we set truncation length by 0, meaning there won't be any truncation by length. This can be changed of course and also complete it with a filtration by quality value, but we have also take in mind that we perform some filtration and truncation processes during the preprocessing step, so maybe is not necessary. 
+Three files are created in the process. _ stats-dada2.qza_ is an artifact contaning information about the filtering and read selection process. It could be visualize on _Qiime view_ or exported to get the information on manageble formats. But the most important outputs are the other two. _rep-seqs-dada2.qza_ contains the selected unique read sequences or ASVs and _table-dada2.qza_ is the summary of the abundance of these ASV along the samples. We will export them to the same directory:
+
+```shell
+   mkdir DADA2
+    qiime tools export --input-path table-dada2.qza --output-path DADA2
+    qiime tools export --input-path rep-seqs-dada2.qza --output-path DADA2
+```
+
+Hence, on _DADA2_ directory we will get all ASVs sequences in fasta format and also a _.tsv_ table showing the abundances by sample (equvalent to the previous OTU table).
+
+### 3.4.Taxonomic classification of reads
+
+We will assume that our sequencing product come from a 16S rRNA metabarcoding analysis, so we are interest on knowing the abundace in Bacteria and Archaea in our samples. Therefore, we will perform a taxonomic assignation using last version of SILVA database, for what we need a trained classifier to run with classification command.
 
 
 Will be edited in the future...
