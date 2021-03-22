@@ -214,8 +214,20 @@ rm qiime2-2021.2-py36-linux-conda.yml
  Files created: _demux.qza_ and _demux-details.qza_
 
 Regard on the _--p-no-golay-error-correction_ option, which must be set on to **avoid golay correction**, since we have 24nt barcodes and this option performs a correction over 12nt barcodes. This could produce an error in the demultiplexing process.
+Addtionally, you could need a summary of the demultiplexing process, which you can get as follows:
 
- ### 3.3.
+```shell
+  qiime demux summarize --i-data demux.qza --o-visualization demux.qzv
+  qiime tools export --input-path demux.qzv --output-path DEMUX_SUMMARY
+```
+First command produce a _.qzv_ file which you could visualize using _Qiime view_. Second command uses this file to return different summary tables which will be send the the _output-path_ directory.
+Also, you could need to get the individual fastq file, which you could get into a common directory with this command:
+
+```shell
+ qiime tools export --input-path demux.qza --output-path FASTQ_FILES
+```
+
+ ### 3.3.Quality control, denoising and picking representative sequences using DADA2
 
 
 Will be edited in the future...
