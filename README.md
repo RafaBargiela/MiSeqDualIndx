@@ -212,5 +212,10 @@ rm qiime2-2021.2-py36-linux-conda.yml
   --o-error-correction-details demux-details.qza
   ```
  Files created: _demux.qza_ and _demux-details.qza_
- 
+
+Regard on the _--p-no-golay-error-correction_ option, which must be set on to **avoid golay correction**, since we have 24nt barcodes and this option performs a correction over 12nt barcodes. This could produce an error in the demultiplexing process.
+
+ ### 3.3.
+
+
 Will be edited in the future...
