@@ -250,6 +250,8 @@ Three files are created in the process. _ stats-dada2.qza_ is an artifact contan
    mkdir DADA2
     qiime tools export --input-path table-dada2.qza --output-path DADA2
     qiime tools export --input-path rep-seqs-dada2.qza --output-path DADA2
+    
+    biom convert -i DADA2/feature-table.biom -o DADA2/feature-table.tsv --to-tsv 
 ```
 
 Hence, on _DADA2_ directory we will get all ASVs sequences in fasta format and also a _.tsv_ table showing the abundances by sample (equvalent to the previous OTU table).
@@ -306,6 +308,21 @@ Finally, we run the training process of the classifier:
 
 #### 3.4.2.Running the taxonomic classification
 
+Once we have our classifier artifact, we can run the classification command to assign a taxonomy to the representative (ASVs) sequences from our samples selected by DADA2.
+
+```shell
+qiime feature-classifier classify-sklearn \
+  --i-classifier  SILVA.classifier.qza \
+  --i-reads rep-seqs-dada2.qza \
+  --o-classification taxonomy.results.qza
+  
+    mkdir TAX
+  qiime metadata tabulate --m-input-file taxonomy.results.qza --o-visualization "TAX/taxonomy.results.qzv
+  qiime tools export --input-path taxonomy.results.qza --output-path TAX
+```
+File created: _taxonomy.results.qza_, _taxonomy.ressults.qzv, _taxonomy.tsv_
+
+With the first command we run the classification itself, creating the artifact _.qza__ with the results. Second command creates a _.qzv_ file to check results on _qiime view_. Finally, _.qza_ file is exported to get a tab-separated text file with the taxonomy in _.tsv_ format. Regard that we previously have created a directory named _TAX_ to store there the results.
 
 
 
