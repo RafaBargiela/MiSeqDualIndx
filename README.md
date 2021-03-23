@@ -9,11 +9,11 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 [1.PREPROCESSING OF SEQUENCING RESULTS](#1preprocessing-of-sequencing-results)
 
-[1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#1.1.trimming-the-barcodes-and-generating-barcodes.fastq-files-and-reads-files-with-barcodes-trimmed)
+[1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#11trimming-the-barcodes-and-generating-barcodes.fastq-files-and-reads-files-with-barcodes-trimmed)
 
-[1.2.Assembling paired-end reads using SeqRep](#1.2.assembling-paired\-end-reads-using-seqrep)
+[1.2.Assembling paired-end reads using SeqRep](#12assembling-paired-end-reads-using-seqrep)
 
-[1.3.Cleaning and trimming adapter/primers sequences](#1.3.cleaning-and-trimming-adapter\/primers-sequences)
+[1.3.Cleaning and trimming adapter/primers sequences](#13cleaning-and-trimming-adapter--primers-sequences)
 
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
