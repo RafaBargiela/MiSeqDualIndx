@@ -6,7 +6,7 @@ This protocol is based on the pipeline mentioned by Fadrosh et al. (Microbiome, 
 Currently, a preprocessing of the initial files is needed, where the pair-end reads are joint, trimmed and cleaned, and barcodes are separated from the reads. Further steps are performed under Qiime for final demultiplexing of the samples, picking of representative sequences (OTUs using Qiime1 or ASVs using Qiime2 with DADA2) and final taxonomic assignation.
 
 ## Processing index
-[1.PREPROCESSING OF THE SEQUENCING RESULTS](#PREPROCESSING OF THE SEQUENCING RESULTS)
+[1.PREPROCESSING OF THE SEQUENCING RESULTS](#1.preprocessing_of_the_sequencing_results)
 
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
