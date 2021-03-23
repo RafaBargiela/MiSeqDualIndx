@@ -7,26 +7,25 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 ## Table of content
 
--[1.PREPROCESSING OF SEQUENCING RESULTS](#1preprocessing-of-sequencing-results)
+- [1.PREPROCESSING OF SEQUENCING RESULTS](#1preprocessing-of-sequencing-results)
  * [1.1.Trimming the barcodes and generating _.fastq_ with trimmed reads](#11trimming-the-barcodes-and-generating-fastq-with-trimmed-reads)
  * [1.2.Assembling paired-end reads using SeqRep](#12assembling-paired-end-reads-using-seqrep)
  * [1.3.Cleaning and trimming adapter/primers sequences](#13cleaning-and-trimming-adapterprimers-sequences)
  * [1.4.Macthing up barcodes and merged reads](#14Macthing-up-barcodes-and-merged-reads)
-
-2.PROCESSING SEQUENCING READS USING QIIME 1
-2.1.Create a mappting file for qiime
-2.2.Demultiplexing the sequences
-2.3.Picking OTUS and classify sequences
-2.4.Diversity and taxonomy distribution analysis
-3.PROCESSING SEQUENCING READS USING QIIME 2
-3.1.Importing files to QIIME2 environment
-3.2.Demultiplexing
-3.3.Quality control, denoising and picking representative sequences using DADA2
-3.4.Taxonomic classification of reads
-3.4.1.Training you own classifier
-3.4.2.Running the taxonomic classification
-3.5.Summarizing results from taxonomic classification
-3.6.Joining everything together
+- [2.PROCESSING SEQUENCING READS USING QIIME 1](#2processing-sequencing-reads-using-qiime-1)
+ * [2.1.Create a mappting file for qiime](#21create-a-mappting-file-for-qiime)
+ * [2.2.Demultiplexing the sequences](#22demultiplexing-the-sequences)
+ * [2.3.Picking OTUS and classify sequences](#23picking-otus-and-classify-sequences)
+ * [2.4.Diversity and taxonomy distribution analysis](#24diversity-and-taxonomy-distribution-analysis)
+- [3.PROCESSING SEQUENCING READS USING QIIME 2](#3processing-sequencing-reads-using-qiime-2)
+ * [3.1.Importing files to QIIME2 environment](#31importing-files-to-qiime2-environment)
+ * [3.2.Demultiplexing](#32demultiplexing)
+ * [3.3.Quality control, denoising and picking representative sequences using DADA2](#33quality-control-denoising-and-picking-representative-sequences-using-DADA2)
+ * [3.4.Taxonomic classification of reads](#34taxonomic-classification-of-reads)
+  + [3.4.1.Training your own classifier](#341training-your-own-classifier)
+  + [3.4.2.Running the taxonomic classification](#342running-the-taxonomic-classification)
+ * [3.5.Summarizing results from taxonomic classification](#35summarizing-results-from-taxonomic-classification)
+ * [3.6.Joining everything together](#36joinning-everything-together)
 
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
