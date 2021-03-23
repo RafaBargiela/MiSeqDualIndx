@@ -7,8 +7,7 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 ## Processing index
 [1.PREPROCESSING OF THE SEQUENCING RESULTS](#1.PREPROCESSING-OF-THE-SEQUENCING-RESULTS)
-
- [1.1.trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#1.1.trimming-the-barcodes-and-generating-barcodes.fastq-files-and-reads-files-with-barcodes-trimmed)
+ [1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#1.1.trimming-the-barcodes-and-generating-barcodes.fastq-files-and-reads-files-with-barcodes-trimmed)
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
 - R2.fastq (Fastq file with the reverse reads).
@@ -29,7 +28,7 @@ Some of the scripts also require the use of biopython and python2, so be aware t
 
 ## 1.PREPROCESSING OF THE SEQUENCING RESULTS
 
-### 1.1.trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
+### 1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
 
 a) Trimming barcodes from fastq files and generating barcodes.fastq files
 ```shell
