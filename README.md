@@ -8,7 +8,6 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 ## Table of content
 
 [1.PREPROCESSING OF SEQUENCING RESULTS](#1preprocessing-of-sequencing-results)
-
 [1.1.Trimming the barcodes and generating _.fastq_ with trimmed reads](#11trimming-the-barcodes-and-generating-fastq-with-trimmed-reads)
 
 [1.2.Assembling paired-end reads using SeqRep](#12assembling-paired-end-reads-using-seqrep)
