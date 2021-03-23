@@ -284,7 +284,7 @@ Hence, on _DADA2_ directory we will get all ASVs sequences in fasta format and a
 
 We will assume that our sequencing product come from a 16S rRNA metabarcoding analysis, so we are interest on knowing the abundace in Bacteria and Archaea in our samples. Therefore, we will perform a taxonomic assignation using last version of SILVA database, for what we need a trained classifier Qiime2 artifact to run with classification command. There are precomputed classifiers available here: https://docs.qiime2.org/2019.10/data-resources. However, we would recommend to train previously our own classifier, so we could also use the very last version of the database we are interested. Also, maybe you want to classify using your custom set of sequences as database or to use a different database without precomputed classifier, so you would need also to train your own one.
 
-#### 3.4.1.Training you own classifier
+#### 3.4.1.Training your own classifier
 
 For this tutorial we will train a classifier to use the last available version of SILVA. To do this we will need two files: 1) DNA sequences on fasta format and 2) a taxonomy table file. Accession number must be the same in both files. In our case, both files are available on ARB-SILVA website. It could be possible that sequences are in RNA instead of DNA, so you will need to translate to DNA your sequences. Also, taxonomy file is just a tab separated file with the accessions on the first column/place and the taxonomy assigned in the second one. 
 First, we need to import to Qiime2 both files (which we will call _SILVA.seqs.fasta_ and _SILVA.taxonomy.txt_):
