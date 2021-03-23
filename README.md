@@ -8,7 +8,7 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 ## Table of content
 [1.PREPROCESSING OF THE SEQUENCING RESULTS](#head1)
 
-[1.PREPROCESSING](#1--preprocessing)
+[1.PREPROCESSING](#1-preprocessing)
 
 [1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#1.1.trimming-the-barcodes-and-generating-barcodes.fastq-files-and-reads-files-with-barcodes-trimmed)
 
