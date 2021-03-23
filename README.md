@@ -26,7 +26,7 @@ We need to have installed the following tools. A good options could be using ana
 
 Some of the scripts also require the use of biopython and python2, so be aware that some warnings or errors can prompt because of this issue.
 
-## 1.PREPROCESSING OF THE SEQUENCING RESULTS
+## 1.PREPROCESSING OF THE SEQUENCING RESULTS (#1.preprocessing-of-the-sequencing-results)
 
 ### 1.1.trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
 
