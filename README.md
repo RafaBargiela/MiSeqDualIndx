@@ -9,7 +9,7 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 [1.PREPROCESSING OF SEQUENCING RESULTS](#1preprocessing-of-sequencing-results)
 
-[1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed](#11trimming-the-barcodes-and-generating-barcodesfastq-files-and-reads-files-with-barcodes-trimmed)
+[1.1.Trimming the barcodes and generating _.fastq_ with trimmed reads](#11trimming-the-barcodes-and-generating-fastq-with-trimmed-reads)
 
 [1.2.Assembling paired-end reads using SeqRep](#12assembling-paired-end-reads-using-seqrep)
 
@@ -36,7 +36,7 @@ Some of the scripts also require the use of biopython and python2, so be aware t
 
 ## 1.PREPROCESSING OF SEQUENCING RESULTS
 
-### 1.1.Trimming the barcodes and generating barcodes.fastq files and reads files with barcodes trimmed
+### 1.1.Trimming the barcodes and generating _.fastq_ with trimmed reads
 
 a) Trimming barcodes from fastq files and generating barcodes.fastq files
 ```shell
