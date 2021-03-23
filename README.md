@@ -253,6 +253,7 @@ Three files are created in the process. _ stats-dada2.qza_ is an artifact contan
     
     biom convert -i DADA2/feature-table.biom -o DADA2/feature-table.tsv --to-tsv 
 ```
+Files created: **_dna-sequences.fasta_**, _feature-table.biom_, **_feature-table.tsv_**
 
 Hence, on _DADA2_ directory we will get all ASVs sequences in fasta format and also a _.tsv_ table showing the abundances by sample (equvalent to the previous OTU table).
 
@@ -292,7 +293,7 @@ Optionally, we can adapt our classifier to the type of sequences we usually anal
 ```
 Files created: _SILVA.ref-seqs-qza_
 
-The advantage of doing this is an adapted classifier to our reads, providing a faster classification over the specific amplified region of the 16S rRNA gene.
+The advantage of doing this is a classifier adapted to our reads, providing a faster classification over the specific amplified region of the 16S rRNA gene.
 
 Finally, we run the training process of the classifier:
 
@@ -324,6 +325,31 @@ File created: _taxonomy.results.qza_, _taxonomy.ressults.qzv, _taxonomy.tsv_
 
 With the first command we run the classification itself, creating the artifact _.qza__ with the results. Second command creates a _.qzv_ file to check results on _qiime view_. Finally, _.qza_ file is exported to get a tab-separated text file with the taxonomy in _.tsv_ format. Regard that we previously have created a directory named _TAX_ to store there the results.
 
+### 3.5.Summarizing results from taxonomic classification
+
+Now we want to our results in a readable format, exportable to keep working with it out of _Qiime_. In the following command we will combine some of the files created in previous steps to, first, create a visualization artifact to use in _qiime view_ and check barplots and tables with the results at different levels of the classification done over the microbiota inhabiting our samples.
+
+```shell
+  qiime taxa barplot \
+  --i-table table-dada2.qza \
+  --i-taxonomy taxonomy.results.qza \
+  --m-metadata-file sample-metadata.tsv \
+  --o-visualization taxa-bar-plots.qzv
+```
+File created: _taxa-bar-plots.qzv_
+
+Finally, we will export the _.qzv_ artifact created to a directory, storing all the tables with taxonomies at different levels and the abundances of each of them in our samples.
+
+```shell
+ mkdir SUMMARY
+    qiime tools export --input-path taxa-bar-plots.qzv --output-path SUMMARY
+```
+
+### 3.6.Joining everything together
+
+Among all the steps, three are the most important files created: _dna-sequences.fasta_, _feature-table.tsv_ and _taxonomy.tsv_. These last two can be joined together in excel, as they should be in the same order with the same number of rows (ASVs IDs), so taxonomy can directly copy/paste as an additional column of the feature-table, getting a nice tipical _OTU_ table with the taxonomy added. Also, the _fasta_ file is useful if you need to check the sequence of any of the reads and _BLAST_ it or to do any other process.
+
+Another useful files are those created inside the _SUMMARY_ directory, particularly the _level.6.csv_ file. Here, the taxonomy abundance described on the _taxonomy.tsv_ file is collapsed on unique taxonomies. In this case, unique taxonomies until genus level (6). Thiss is a good complement to stick next to the raw _otu table_, to check directly how many reads of a specific taxon are in our samples.
 
 
-Will be edited in the future...
+
