@@ -13,7 +13,7 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 [1.2.Assembling paired-end reads using SeqRep](#12assembling-paired-end-reads-using-seqrep)
 
-[1.3.Cleaning and trimming adapter/primers sequences](#13cleaning-and-trimming-adapter-primers-sequences)
+[1.3.Cleaning and trimming adapter/primers sequences](#13cleaning-and-trimming-adapter--primers-sequences)
 
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
