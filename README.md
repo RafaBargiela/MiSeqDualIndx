@@ -15,6 +15,8 @@ Currently, a preprocessing of the initial files is needed, where the pair-end re
 
 [1.3.Cleaning and trimming adapter/primers sequences](#13cleaning-and-trimming-adapterprimers-sequences)
 
+[1.4.Macthing up barcodes and merged reads](#14Macthing-up-barcodes-and-merged-reads)
+
 ### Initial files:
 - R1.fastq (Fastq file with the forward reads).
 - R2.fastq (Fastq file with the reverse reads).
