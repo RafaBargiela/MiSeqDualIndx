@@ -189,8 +189,8 @@ For the analysis using QIIME2 we start from Step 4, once all preprocessing is do
 Also, we need to create a *sample-metadata.tsv* file to use with QIIME2, a bit different from the *mappingFile.txt* used with QIIME1. This file has the following tab-separated format:
 
 `
- sample-id  barcode-sequence  description\
- #q2:types  categorical categorical\
+ sample-id  barcode-sequence  description  
+ #q2:types  categorical categorical  
  SAMPLE1  BARCODE_SEQUENCE  OPTIONAL_DATA
  `
  
