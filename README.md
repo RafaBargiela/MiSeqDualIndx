@@ -187,20 +187,25 @@ For the analysis using QIIME2 we start from Step 4, once all preprocessing is do
 - Create a new folder with only these two files on it, which we will call *RAW* on this tutorial
 
 Also, we need to create a *sample-metadata.tsv* file to use with QIIME2, a bit different from the *mappingFile.txt* used with QIIME1. This file has the following tab-separated format:
+
 `
- sample-id\tbarcode-sequence\tdescription\n
- #q2:types\tcategorical\tcategorical\n
- SAMPLE1\tBARCODE_SEQUENCE\tOPTIONAL_DATA\n
+ sample-id  barcode-sequence  description
+ #q2:types  categorical categorical
+ SAMPLE1  BARCODE_SEQUENCE  OPTIONAL_DATA
  `
+ 
  It is very similar to the mapping file used on QIIME1, with the 24bp barcodes sequences (Reverse-forward joined) in the second column. Be careful with the first column name, QIIME2 only accepts some different variants.
  As it was with QIIME1, it is also recommended to install QIMME2 under a conda environment. You can do it as follows:
+ 
  ```shell
  wget https://data.qiime2.org/distro/core/qiime2-2021.2-py36-linux-conda.yml
 conda env create -n qiime2-2021.2 --file qiime2-2021.2-py36-linux-conda.yml
 # OPTIONAL CLEANUP
 rm qiime2-2021.2-py36-linux-conda.yml
 ```
+
  Then, activate the environment:
+ 
  ```shell
  conda activate qiime2-2021.2
  ```
