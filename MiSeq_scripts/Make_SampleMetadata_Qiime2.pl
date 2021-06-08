@@ -9,6 +9,10 @@
 # and converts it in a sample-metadata file.
 
 # Usage: perl Make_SampleMetadata_Qiime2.pl <SAMPLESHEET.txt> > sample-metadata.tsv
+
+# NOTE: there are barcodes sequences added on the bottom with their cooresponding ID. If they
+#       don't correspond to those you are using, just add them on the hash made on the bottom by
+#       'indexes' subroutine.
 ####################################################################################################
 use strict;
 ####################################################################################################
